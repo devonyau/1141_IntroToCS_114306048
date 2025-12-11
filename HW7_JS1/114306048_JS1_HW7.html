@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>114306048_HW7_1A2B</title>
+</head>
+<body>
+
+<h1>114306048_HW7_1A2B</h1>
+
+<p>Guess the 4-digit number (digits are all different).</p>
+
+<input id="inputNum" type="text" placeholder="Enter 4 unique digits">
+<button onclick="play()">Guess</button>
+
+<div id="record"></div>
+
+<script>
+    
+    var answer = generateAnswer();
+    var attempts = 0;
+    var gameOver = false;
+
+    console.log("Answer (for testing): " + answer); 
+
+    function generateAnswer() {
+        var digits = [0,1,2,3,4,5,6,7,8,9];
+        var ans = "";
+        var i, idx;
+
+        for (i = 0; i < 4; i++) {
+            idx = Math.floor(Math.random() * digits.length);
+            ans += digits[idx];
+            digits.splice(idx, 1); 
+        }
+        return ans;
+    }
+
+    function play() {
+        if (gameOver) {
+            alert("The game is already finished. Please refresh the page to play again.");
+            return;
+        }
+
+        var inputField = document.getElementById("inputNum");
+        var guess = inputField.value.trim();
+
+        if (!isValid(guess)) {
+            alert("Invalid input! Please enter exactly 4 digits with no repeated digits.");
+            return;
+        }
+
+        attempts++;
+
+        var result = checkAB(guess, answer);
+
+        var recordDiv = document.getElementById("record");
+        recordDiv.innerHTML += "Attempt " + attempts + ": " + guess + " → " + result + "<br>";
+
+        inputField.value = "";
+
+        if (result === "4A0B") {
+            alert("Correct! You guessed the answer in " + attempts + " attempts.");
+            gameOver = true;
+        }
+    }
+
+    function isValid(str) {
+        var i, c;
+
+        if (str.length !== 4) {
+            return false;
+        }
+
+        if (!/^[0-9]{4}$/.test(str)) {
+            return false;
+        }
+
+        var seen = {};
+        for (i = 0; i < str.length; i++) {
+            c = str.charAt(i);
+            if (seen[c]) {
+                return false; 
+            }
+            seen[c] = true;
+        }
+
+        return true;
+    }
+
+    function checkAB(guess, ans) {
+        var A = 0;
+        var B = 0;
+        var i;
+
+        for (i = 0; i < 4; i++) {
+            if (guess.charAt(i) === ans.charAt(i)) {
+                A++;
+            } else if (ans.indexOf(guess.charAt(i)) !== -1) {
+                B++;
+            }
+        }
+
+        return A + "A" + B + "B";
+    }
+</script>
+
+</body>
+</html>
