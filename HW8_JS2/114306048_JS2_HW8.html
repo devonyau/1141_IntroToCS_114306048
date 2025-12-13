@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>114306048_JS2_HW8</title>
+<link rel="stylesheet" href="114306048_JS2_HW8.css" />
+</head>
+<body>
+  <h1>HW8 Calculator</h1>
+
+  <div class="box">
+    <div class="row">
+      <label for="num1">Number 1</label>
+      <input id="num1" type="number" step="any" placeholder="Enter a number" />
+    </div>
+
+    <div class="row">
+      <label for="op">Operator</label>
+      <select id="op">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+    </div>
+
+    <div class="row">
+      <label for="num2">Number 2</label>
+      <input id="num2" type="number" step="any" placeholder="Enter a number" />
+    </div>
+
+    <button id="calcBtn">Calculate</button>
+
+    <p id="error" class="error"></p>
+    <p class="result">Result: <span id="result">-</span></p>
+  </div>
+
+  <script src="114306048_JS2_HW8.js"></script>
+</body>
+</html>
